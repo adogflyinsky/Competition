@@ -4,7 +4,7 @@ pragma solidity ^0.8.16;
 import "./interfaces/IQuestionSet.sol";
 import "./libraries/CustomMath.sol";
 
-contract QuestionSet is IQuestionSet {
+contract QuestionSetV1 is IQuestionSet {
     using CustomMath for uint256;
     
     function getProof(string memory data, uint256 numOfQuestions, uint256 index) public pure returns (uint256) {

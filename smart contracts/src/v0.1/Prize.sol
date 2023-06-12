@@ -80,10 +80,17 @@ contract Prize is IPrize, ERC721Enumerable {
     }
 
     function checkIsActive(uint256 id) public view returns (bool) {
+        require(_tokenIdTracker.current() >= id, "Token is not minted.");
         return prizes[id].isActive;
     }
 
     function taskIdOf(uint256 id) public view returns (uint256) { 
+        require(_tokenIdTracker.current() >= id, "Token is not minted.");
         return prizes[id].taskId;
+    }
+
+    function getRatio(uint256 id) public view returns (uint256[] memory) {
+        require(_tokenIdTracker.current() >= id, "Token is not minted.");
+        return prizes[id].ratio;
     }
 }

@@ -5,7 +5,7 @@ dotenv.config({ path: __dirname + "/.env" });
 module.exports = {
   solidity: "0.8.16",
   paths: {
-    sources: './src'
+    sources: './src/v0.1'
   },
   networks: {
     bsctest: {
