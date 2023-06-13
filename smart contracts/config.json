@@ -1,13 +1,6 @@
 {
   "dev": {},
-  "baobab": {
-    "competitionToken": "0x97Cc3Cb0796e15fdDb47b1587Fe977A68904785C",
-    "vToken": "0xAfec107c031Cd5b33BD46120b564887Cd81Cd14e",
-    "prize": "0xAfec107c031Cd5b33BD46120b564887Cd81Cd14e",
-    "customMath": "0xC590e8F9e0A107D7aF1F66a96fcB848f3A427907",
-    "questionSet": "0x9412D9EdD944F9eA6cC00aACcA33B231b22C85fF",
-    "competitionV1": "0xdf40Fdf9B507Ea6Aa8009538D1AeBA8381b5f5B7"
-  },
+  "baobab": {},
   "bsctest": {},
   "main": {}
 }
