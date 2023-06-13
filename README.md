@@ -11,4 +11,4 @@ many factors, such as probability, complexity,...) for other participants to tra
 
 ### 3. Smart contracts
 The participants ensure that if the competition organizer correctly reports the results, the participant who fills in the correct data will receive the correct rank and prize as announced.
-Move to [folder](./contracts) to know how it works. 
+
