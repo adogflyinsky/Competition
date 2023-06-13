@@ -8,14 +8,14 @@ module.exports = {
     sources: './src/v0.1'
   },
   networks: {
-    bsctest: {
-      url: "https://data-seed-prebsc-2-s2.binance.org:8545",
-      accounts: [process.env.PRIVATE_KEY]
-    },
-    baobab: {
-      url: 'https://api.baobab.klaytn.net:8651',
-      accounts: [process.env.PRIVATE_KEY]
-    }
+    // bsctest: {
+    //   url: "https://data-seed-prebsc-2-s2.binance.org:8545",
+    //   accounts: [process.env.PRIVATE_KEY]
+    // },
+    // baobab: {
+    //   url: 'https://api.baobab.klaytn.net:8651',
+    //   accounts: [process.env.PRIVATE_KEY]
+    // }
   }
 };
 
