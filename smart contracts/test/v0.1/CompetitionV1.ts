@@ -12,7 +12,7 @@ describe("CompetitionV1", function () {
     const [owner, acc1, acc2, acc3] = await ethers.getSigners();
     const CustomMath = await ethers.getContractFactory("CustomMath");
     const customMath = await CustomMath.deploy();
-    const QuestionSet = await ethers.getContractFactory("QuestionSet", {
+    const QuestionSet = await ethers.getContractFactory("QuestionSetV1", {
         libraries: {
             CustomMath: customMath.address,
         }
