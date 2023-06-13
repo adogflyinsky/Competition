@@ -9,14 +9,13 @@ abstract contract CompetitionBase {
         uint256 id;
         uint256 startTime;
         address[] participants;
-        bytes[] encodedDataList; // including: address, index of participant, answer 
+        bytes[] encodedDataList; 
         string result;
         address[] winners;
     }
 
-    Competition[] public competitions;
+    Competition[] internal competitions;
     mapping(uint256 => uint256) internal trackingCompetition;
-
 
     function _create(uint256 id) internal virtual {
         require(!isInCompetition(id), "The id is existed in competition");
@@ -29,24 +28,21 @@ abstract contract CompetitionBase {
 
     function _remove(uint256 id) internal virtual isValidCompetition(id) {
         uint256 index = trackingCompetition[id];
-        require(msg.sender == competitions[index].owner, "You are not owner of this puzzle id");
         require(competitions[index].startTime == 0, "The competition is started");
         _naiveRemove(id);
     }
     
     function _start(uint256 id, address[] memory participants, uint256 time) internal virtual {
         uint256 index = trackingCompetition[id];
-        require(msg.sender == competitions[index].owner, "You are not owner of this puzzle id");
         competitions[index].participants = participants;
         competitions[index].startTime= block.timestamp + time;
     }
 
-    // remove address in participants by assign address(0) and add encodeData to encodedDataList
     function _fillData(uint256 id, uint256 data) internal virtual isValidCompetition(id) 
     {
         uint256 index = trackingCompetition[id];
         require(competitions[index].startTime <= block.timestamp, "Can not fill data yet");
-        require(bytes(competitions[index].result).length == 0, "result is filled");
+        require(bytes(competitions[index].result).length == 0, "Result is filled");
         for (uint256 i = 0; i < competitions[index].participants.length ; i ++) {
             if (msg.sender == competitions[index].participants[i]) {
                 competitions[index].participants[i] = address(0);
@@ -58,11 +54,9 @@ abstract contract CompetitionBase {
         revert IsNotParticipant();
     } 
 
-
-    // add condition and specific address allowing to fill result
     function _fillResult(uint256 id, string memory result) internal virtual isValidCompetition(id) {
         uint256 index = trackingCompetition[id];
-        require(bytes(competitions[index].result).length == 0, "result is filled");
+        require(bytes(competitions[index].result).length == 0, "Result is filled");
         competitions[index].result = result;
     }
 
@@ -70,7 +64,7 @@ abstract contract CompetitionBase {
 
     function _finish(uint256 id) internal virtual isValidCompetition(id) {
         uint256 index = trackingCompetition[id];
-        require(bytes(competitions[index].result).length != 0, "result is not filled");
+        require(bytes(competitions[index].result).length != 0, "Result is not filled");
         _getWinners(id);
         _naiveRemove(id);
     }
@@ -100,13 +94,15 @@ abstract contract CompetitionBase {
         _;
     }
 
+    function getCompetition(uint256 id) public view isValidCompetition(id) returns (Competition memory) {
+        uint256 index = trackingCompetition[id];
+        return competitions[index];
+
+    }
+
     function getParticipants(uint256 id) public view isValidCompetition(id) returns (address[] memory) {
         uint256 index = trackingCompetition[id];
         return competitions[index].participants;
     }
 
-}   
-
-
-
-
+}
