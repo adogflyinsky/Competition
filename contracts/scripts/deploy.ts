@@ -9,19 +9,19 @@ async function main() {
 
     const CompetitionToken = await ethers.getContractFactory("CompetitionToken");
     const competitionToken = await CompetitionToken.deploy("https://old.chesstempo.com/chess-problems/");
-    Config.setConfig(network + '.competitionToken', competitionToken.address);
+    Config.setConfig(network + '.CompetitionToken', competitionToken.address);
 
-    const VToken = await ethers.getContractFactory("VToken");
-    const vToken = await VToken.deploy();
-    Config.setConfig(network + '.vToken', vToken.address);
+    const PrizeToken = await ethers.getContractFactory("PrizeToken");
+    const prizeToken = await PrizeToken.deploy();
+    Config.setConfig(network + '.PrizeToken', prizeToken.address);
 
     const Prize = await ethers.getContractFactory("Prize");
-    const prize = await Prize.deploy(vToken.address);
-    Config.setConfig(network + '.prize', prize.address);
+    const prize = await Prize.deploy(prizeToken.address);
+    Config.setConfig(network + '.Prize', prize.address);
 
     const CustomMath = await ethers.getContractFactory("CustomMath");
     const customMath = await CustomMath.deploy();
-    Config.setConfig(network + '.customMath', customMath.address);
+    Config.setConfig(network + '.CustomMath', customMath.address);
 
     const QuestionSet = await ethers.getContractFactory("QuestionSetV1",
         {
@@ -30,7 +30,7 @@ async function main() {
             }
         });
     const questionSet = await QuestionSet.deploy();
-    Config.setConfig(network + '.questionSet', questionSet.address);
+    Config.setConfig(network + '.QuestionSetV1', questionSet.address);
 
     const CompetitionV1 = await ethers.getContractFactory("CompetitionV1");
     const competitionV1 = await CompetitionV1.deploy
@@ -39,10 +39,9 @@ async function main() {
             prize.address,
             questionSet.address
         );
-    Config.setConfig(network + '.competitionV1', competitionV1.address);
+    Config.setConfig(network + '.CompetitionV1', competitionV1.address);
 
     await Config.updateConfig();
-
 }
 
 main().then(() => process.exit(0))

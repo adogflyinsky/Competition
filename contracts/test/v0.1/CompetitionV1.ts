@@ -18,17 +18,17 @@ describe("CompetitionV1", function () {
         }
     });
     const questionSet = await QuestionSet.deploy();
-    const VToken = await ethers.getContractFactory("VToken");
-    const vToken = await VToken.deploy();
+    const PrizeToken = await ethers.getContractFactory("PrizeToken");
+    const prizeToken = await PrizeToken.deploy();
     const Prize = await ethers.getContractFactory("Prize");
-    const prize = await Prize.deploy(vToken.address);
+    const prize = await Prize.deploy(prizeToken.address);
     const CompetitionToken = await ethers.getContractFactory("CompetitionToken");
     const competitionToken = await CompetitionToken.deploy("https://old.chesstempo.com/chess-problems/");
    
     const CompetitionV1 = await ethers.getContractFactory("CompetitionV1");
     const competitionV1 = await CompetitionV1.deploy(competitionToken.address, prize.address, questionSet.address);
 
-    return { prize, competitionToken, competitionV1, vToken, owner, acc1, acc2, acc3};
+    return { prize, competitionToken, competitionV1, vToken: prizeToken, owner, acc1, acc2, acc3};
   }
 
   describe("Happy path", function () {
