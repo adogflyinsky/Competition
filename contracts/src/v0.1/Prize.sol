@@ -18,7 +18,7 @@ contract Prize is IPrize, ERC721Enumerable {
         uint256 taskId;
         
         uint256 amount;
-        uint256[] ratio; // Purpose is for spending all.
+        uint256[] ratio;
 
         bool isActive; 
     }
